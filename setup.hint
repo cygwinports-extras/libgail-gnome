@@ -1,5 +1,5 @@
-category: Accessibility Gnome
-requires: cygwin ORBit2 at-spi atk-runtime gnome-panel libbonobo2 libbonoboui2
+category: Gnome
+requires: cygwin ORBit2 at-spi atk glib2 gnome-panel gtk2-x11 libbonobo2 libbonoboui2
 sdesc: "Accessibility support for the GNOME libraries"
 ldesc: "GAIL-Gnome provides accessibility support for the GNOME libraries by
 implementing AtkObjects for GNOME widgets as a GTK+ module."
