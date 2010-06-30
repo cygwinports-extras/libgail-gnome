@@ -1,3 +1,5 @@
 inherit gnome2
 
 DESCRIPTION="Accessibility support for the GNOME libraries"
+
+PATCH_URI="1.20.3-no-panel.patch"

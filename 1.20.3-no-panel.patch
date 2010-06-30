@@ -1,0 +1,64 @@
+--- origsrc/libgail-gnome-1.20.3/configure.in	2010-06-21 08:18:46.000000000 -0500
++++ src/libgail-gnome-1.20.3/configure.in	2010-06-30 03:02:46.252360900 -0500
+@@ -125,7 +125,7 @@ PKG_CHECK_MODULES([DEPS],[
+ 	$LIBBONOBOUI_PACKAGES >= $LIBBONOBO_REQUIRED_VERSION
+ 	$LIBGNOMEUI_PACKAGES >= $LIBGNOMEUI_REQUIRED_VERSION
+ 	$AT_SPI_PACKAGES >= $AT_SPI_REQUIRED_VERSION
+-	$PANEL_APPLET_PACKAGES >= $PANEL_APPLET_REQUIRED_VERSION])
++])
+ 
+ PKG_CHECK_MODULES([TEST],[
+ 	$ATK_PACKAGES >= $ATK_REQUIRED_VERSION
+@@ -135,7 +135,7 @@ PKG_CHECK_MODULES([TEST],[
+ 	$LIBGNOMEUI_PACKAGES >= $LIBGNOMEUI_REQUIRED_VERSION
+ 	$AT_SPI_PACKAGES >= $AT_SPI_REQUIRED_VERSION
+ 	$CSPI_PACKAGES >= $CSPI_REQUIRED_VERSION
+-	$PANEL_APPLET_PACKAGES >= $PANEL_APPLET_REQUIRED_VERSION])
++])
+ 
+ AC_SUBST([DEPS_CFLAGS])
+ AC_SUBST([DEPS_LIBS])
+--- origsrc/libgail-gnome-1.20.3/gail-gnome/Makefile.am	2009-04-21 17:57:02.000000000 -0500
++++ src/libgail-gnome-1.20.3/gail-gnome/Makefile.am	2010-06-30 02:59:42.306839800 -0500
+@@ -8,8 +8,6 @@ gailgnome_c_sources =				\
+ 	bonobo_plug_atk_object_factory.c 	\
+ 	bonobo_socket_atk_object.c		\
+ 	bonobo_socket_atk_object_factory.c	\
+-	panel-applet-atk-object-factory.c	\
+-	panel-applet-atk-object.c		\
+ 	bonobo-accessibility-init.c		
+ 
+ gailgnome_private_h_sources =			\
+@@ -19,8 +17,6 @@ gailgnome_private_h_sources =			\
+ 	bonobo_plug_atk_object_factory.h 	\
+ 	bonobo_socket_atk_object.h		\
+ 	bonobo_socket_atk_object_factory.h	\
+-	panel-applet-atk-object.h		\
+-	panel-applet-atk-object-factory.h	\
+         gail-gnome-debug.h
+ 
+ gailgnome_public_h_sources =
+--- origsrc/libgail-gnome-1.20.3/gail-gnome/bonobo-accessibility-init.c	2009-04-21 17:57:02.000000000 -0500
++++ src/libgail-gnome-1.20.3/gail-gnome/bonobo-accessibility-init.c	2010-06-30 02:59:33.258322200 -0500
+@@ -26,13 +26,11 @@
+ #include <bonobo/bonobo-control.h>
+ #include <bonobo/bonobo-exception.h>
+ #include <bonobo/bonobo-control-frame.h>
+-#include <panel-applet.h>
+ #include <libspi/accessible.h>
+ #include "bonobo-control-accessible.h"
+ #include "bonobo-control-frame-accessible.h"
+ #include "bonobo_plug_atk_object_factory.h"
+ #include "bonobo_socket_atk_object_factory.h"
+-#include "panel-applet-atk-object-factory.h"
+ #include "gail-gnome-debug.h"
+ 
+ #define GNOME_ACCESSIBILITY_ENV "GNOME_ACCESSIBILITY"
+@@ -93,7 +91,6 @@ gail_bonobo_ui_register_atk_factories (v
+   AtkRegistry *registry = atk_get_default_registry ();	
+   atk_registry_set_factory_type (registry, BONOBO_TYPE_PLUG, BONOBO_TYPE_PLUG_ATK_OBJECT_FACTORY);
+   atk_registry_set_factory_type (registry, BONOBO_TYPE_SOCKET, BONOBO_TYPE_SOCKET_ATK_OBJECT_FACTORY);   
+-  atk_registry_set_factory_type (registry, PANEL_TYPE_APPLET, PANEL_APPLET_TYPE_ATK_OBJECT_FACTORY);
+ }
+ 
+ static void
